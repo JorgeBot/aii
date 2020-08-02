@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "aii.allow-origin",
+      "type": "java.lang.String",
+      "description": "前端项目地址."
+    }
+  ]
+}
