@@ -1,18 +1,32 @@
 package com.example.aii.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
+
 import java.util.Map;
 
+@TableName(autoResultMap = true)
 public class Interface extends BaseEntity {
+
+    public enum METHOD {GET, POST, DELETE, PUT, PATCH}
+    public enum DATA_TYPE{FORM_DATA, ARRAY, JSON_OBJECT}
+
     private String interfaceName;
     private Integer timeout;
-    private String URL;
+    private METHOD method;
+    private String url;
     private String protocol;
     private String hostname;
     private Integer port;
     private String path;
+    @TableField(typeHandler = JacksonTypeHandler.class)
     private Map<String, String> parameters;
+    @TableField(typeHandler = JacksonTypeHandler.class)
     private Map<String, String> headers;
+    @TableField(typeHandler = JacksonTypeHandler.class)
     private Object body;
+    private DATA_TYPE dataType;
     private String requestParams;
     private String responseParams;
 
@@ -32,12 +46,20 @@ public class Interface extends BaseEntity {
         this.timeout = timeout;
     }
 
-    public String getURL() {
-        return URL;
+    public METHOD getMethod() {
+        return method;
     }
 
-    public void setURL(String URL) {
-        this.URL = URL;
+    public void setMethod(METHOD method) {
+        this.method = method;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getProtocol() {
@@ -110,5 +132,13 @@ public class Interface extends BaseEntity {
 
     public void setResponseParams(String responseParams) {
         this.responseParams = responseParams;
+    }
+
+    public DATA_TYPE getDataType() {
+        return dataType;
+    }
+
+    public void setDataType(DATA_TYPE dataType) {
+        this.dataType = dataType;
     }
 }
