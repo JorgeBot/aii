@@ -31,4 +31,10 @@ public class CustomExceptionHandler {
         System.out.println("未授权访问");
         return "未授权访问";
     }
+
+    @ExceptionHandler(AiiException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public String handlerAiiException(AiiException e) {
+        return e.getMessage();
+    }
 }

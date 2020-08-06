@@ -3,31 +3,33 @@ package com.example.aii.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 
-import java.util.Map;
+import java.util.LinkedHashMap;
 
 @TableName(autoResultMap = true)
 public class Interface extends BaseEntity {
 
-    public enum METHOD {GET, POST, DELETE, PUT, PATCH}
-    public enum DATA_TYPE{FORM_DATA, ARRAY, JSON_OBJECT}
-
     private String interfaceName;
     private Integer timeout;
-    private METHOD method;
+    private HttpMethod method;
     private String url;
     private String protocol;
     private String hostname;
     private Integer port;
     private String path;
     @TableField(typeHandler = JacksonTypeHandler.class)
-    private Map<String, String> parameters;
+    private LinkedHashMap<String, String> parameters;
     @TableField(typeHandler = JacksonTypeHandler.class)
-    private Map<String, String> headers;
+    private LinkedHashMap<String, String> requestHeaders;
     @TableField(typeHandler = JacksonTypeHandler.class)
-    private Object body;
-    private DATA_TYPE dataType;
+    private Object requestData;
     private String requestParams;
+    @TableField(typeHandler = JacksonTypeHandler.class)
+    private LinkedHashMap<String, String> responseHeaders;
+    @TableField(typeHandler = JacksonTypeHandler.class)
+    private Object responseBody;
     private String responseParams;
 
     public String getInterfaceName() {
@@ -46,11 +48,11 @@ public class Interface extends BaseEntity {
         this.timeout = timeout;
     }
 
-    public METHOD getMethod() {
+    public HttpMethod getMethod() {
         return method;
     }
 
-    public void setMethod(METHOD method) {
+    public void setMethod(HttpMethod method) {
         this.method = method;
     }
 
@@ -94,28 +96,28 @@ public class Interface extends BaseEntity {
         this.path = path;
     }
 
-    public Map<String, String> getParameters() {
+    public LinkedHashMap<String, String> getParameters() {
         return parameters;
     }
 
-    public void setParameters(Map<String, String> parameters) {
+    public void setParameters(LinkedHashMap<String, String> parameters) {
         this.parameters = parameters;
     }
 
-    public Map<String, String> getHeaders() {
-        return headers;
+    public LinkedHashMap<String, String> getRequestHeaders() {
+        return requestHeaders;
     }
 
-    public void setHeaders(Map<String, String> headers) {
-        this.headers = headers;
+    public void setRequestHeaders(LinkedHashMap<String, String> requestHeaders) {
+        this.requestHeaders = requestHeaders;
     }
 
-    public Object getBody() {
-        return body;
+    public Object getRequestData() {
+        return requestData;
     }
 
-    public void setBody(Object body) {
-        this.body = body;
+    public void setRequestData(Object requestData) {
+        this.requestData = requestData;
     }
 
     public String getRequestParams() {
@@ -126,19 +128,27 @@ public class Interface extends BaseEntity {
         this.requestParams = requestParams;
     }
 
+    public LinkedHashMap<String, String> getResponseHeaders() {
+        return responseHeaders;
+    }
+
+    public void setResponseHeaders(LinkedHashMap<String, String> responseHeaders) {
+        this.responseHeaders = responseHeaders;
+    }
+
+    public Object getResponseBody() {
+        return responseBody;
+    }
+
+    public void setResponseBody(Object responseBody) {
+        this.responseBody = responseBody;
+    }
+
     public String getResponseParams() {
         return responseParams;
     }
 
     public void setResponseParams(String responseParams) {
         this.responseParams = responseParams;
-    }
-
-    public DATA_TYPE getDataType() {
-        return dataType;
-    }
-
-    public void setDataType(DATA_TYPE dataType) {
-        this.dataType = dataType;
     }
 }
