@@ -1,6 +1,6 @@
 module.exports = {
     baseUrl: "http://localhost",
-    permission: true,
+    permission: false,
     menu: [
         {
             icon: "el-icon-setting",
@@ -22,21 +22,16 @@ module.exports = {
             ]
         },
         {
-            icon: "el-icon-setting",
-            name: "用户中心",
-            index: "center",
+            icon: "el-icon-lx-copy",
+            name: "接口管理",
+            index: "interface",
             type: "trunk",
             children: [
                 {
-                    index: "1",
-                    name: "我的工作台",
+                    index: "http",
+                    name: "HTTP接口",
                     type: "leaf"
                 },
-                {
-                    index: "2",
-                    name: "我的信息",
-                    type: "leaf"
-                }
             ]
         }
     ]

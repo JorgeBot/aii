@@ -12,47 +12,52 @@ export default new Router({
         {
             path: '/',
             component: resolve => require(['../components/common/Home.vue'], resolve),
-            meta: { title: '自述文件' },
-            children:[
+            meta: {title: '自述文件'},
+            children: [
                 {
                     path: '/dashboard',
                     component: resolve => require(['../components/page/Dashboard.vue'], resolve),
-                    meta: { title: '系统首页' }
+                    meta: {title: '系统首页'}
                 },
                 {
                     path: '/icon',
                     component: resolve => require(['../components/page/Icon.vue'], resolve),
-                    meta: { title: '自定义图标' }
+                    meta: {title: '自定义图标'}
                 },
                 {
                     path: '/tabs',
                     component: resolve => require(['../components/page/Tabs.vue'], resolve),
-                    meta: { title: 'tab选项卡' }
+                    meta: {title: 'tab选项卡'}
                 },
                 {
                     path: '/404',
                     component: resolve => require(['../components/page/404.vue'], resolve),
-                    meta: { title: '404' }
+                    meta: {title: '404'}
                 },
                 {
                     path: '/403',
                     component: resolve => require(['../components/page/403.vue'], resolve),
-                    meta: { title: '403' }
+                    meta: {title: '403'}
                 },
                 {
                     path: '/admin',
                     component: resolve => require(['../components/page/admin.vue'], resolve),
-                    meta: { title: '用户信息' }
+                    meta: {title: '用户信息'}
                 },
                 {
                     path: '/usermanager',
                     component: resolve => require(['../components/page/sysmanager/usermanager.vue'], resolve),
-                    meta: { title: '人员管理' }
+                    meta: {title: '人员管理'}
                 },
                 {
                     path: '/rolemanager',
                     component: resolve => require(['../components/page/sysmanager/rolemanager.vue'], resolve),
-                    meta: { title: '角色管理' }
+                    meta: {title: '角色管理'}
+                },
+                {
+                    path: '/http',
+                    component: resolve => require(['../components/page/interface/HTTPManagement.vue'], resolve),
+                    meta: {title: 'HTTP接口'}
                 }
             ]
         },
