@@ -5,7 +5,7 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 
 import java.util.UUID;
 
-public class EncryptUtil {
+public class EncryptUtils {
 
     /**
      * 生成32的随机盐值

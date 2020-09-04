@@ -3,8 +3,8 @@ package com.example.aii.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.util.LinkedMultiValueMap;
 
 import java.util.LinkedHashMap;
 
@@ -14,20 +14,19 @@ public class Interface extends BaseEntity {
     private String interfaceName;
     private Integer timeout;
     private HttpMethod method;
-    private String url;
     private String protocol;
-    private String hostname;
+    private String version;
     private Integer port;
     private String path;
     @TableField(typeHandler = JacksonTypeHandler.class)
     private LinkedHashMap<String, String> parameters;
     @TableField(typeHandler = JacksonTypeHandler.class)
-    private LinkedHashMap<String, String> requestHeaders;
+    private LinkedMultiValueMap<String, String> requestHeaders;
     @TableField(typeHandler = JacksonTypeHandler.class)
     private Object requestData;
     private String requestParams;
     @TableField(typeHandler = JacksonTypeHandler.class)
-    private LinkedHashMap<String, String> responseHeaders;
+    private LinkedMultiValueMap<String, String> responseHeaders;
     @TableField(typeHandler = JacksonTypeHandler.class)
     private Object responseBody;
     private String responseParams;
@@ -56,14 +55,6 @@ public class Interface extends BaseEntity {
         this.method = method;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public String getProtocol() {
         return protocol;
     }
@@ -72,12 +63,12 @@ public class Interface extends BaseEntity {
         this.protocol = protocol;
     }
 
-    public String getHostname() {
-        return hostname;
+    public String getVersion() {
+        return version;
     }
 
-    public void setHostname(String hostname) {
-        this.hostname = hostname;
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     public Integer getPort() {
@@ -104,11 +95,11 @@ public class Interface extends BaseEntity {
         this.parameters = parameters;
     }
 
-    public LinkedHashMap<String, String> getRequestHeaders() {
+    public LinkedMultiValueMap<String, String> getRequestHeaders() {
         return requestHeaders;
     }
 
-    public void setRequestHeaders(LinkedHashMap<String, String> requestHeaders) {
+    public void setRequestHeaders(LinkedMultiValueMap<String, String> requestHeaders) {
         this.requestHeaders = requestHeaders;
     }
 
@@ -128,11 +119,11 @@ public class Interface extends BaseEntity {
         this.requestParams = requestParams;
     }
 
-    public LinkedHashMap<String, String> getResponseHeaders() {
+    public LinkedMultiValueMap<String, String> getResponseHeaders() {
         return responseHeaders;
     }
 
-    public void setResponseHeaders(LinkedHashMap<String, String> responseHeaders) {
+    public void setResponseHeaders(LinkedMultiValueMap<String, String> responseHeaders) {
         this.responseHeaders = responseHeaders;
     }
 

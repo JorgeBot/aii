@@ -2,23 +2,17 @@ package com.example.aii;
 
 import com.example.aii.mapper.InterfaceMapper;
 import com.example.aii.service.InterfaceService;
-import com.example.aii.util.EncryptUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.nio.charset.Charset;
 
 @SpringBootTest
 class AiiApplicationTests {

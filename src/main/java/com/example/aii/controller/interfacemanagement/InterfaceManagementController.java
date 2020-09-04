@@ -6,14 +6,16 @@ import com.example.aii.entity.Interface;
 import com.example.aii.entity.User;
 import com.example.aii.service.InterfaceService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.time.LocalDateTime;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
+@RequiresPermissions("HTTP接口")
 public class InterfaceManagementController {
 
     @Resource
@@ -21,9 +23,8 @@ public class InterfaceManagementController {
 
     @GetMapping("/interfacePage")
     public IPage<Interface> getInterfacePage(@RequestParam(required = false) String interfaceNameLike,
-                                             @RequestParam(defaultValue = "1") Integer current,
-                                             @RequestParam(defaultValue = "10") Integer size) {
-        return interfaceService.findByInterfaceNameLike(interfaceNameLike, new Page<>(current, size));
+                                             Page<Interface> page) {
+        return interfaceService.findByInterfaceNameLike(interfaceNameLike, page);
 
     }
 
@@ -41,20 +42,17 @@ public class InterfaceManagementController {
     }
 
     @PostMapping("/interface")
+    @RequiresPermissions("新增HTTP接口")
     public void postInterface(InterfaceDTO interfaceDTO) {
         Interface anInterface = interfaceDTO.toInterface();
         interfaceService.save(anInterface);
     }
 
     @PatchMapping("/interface/{id}")
+    @RequiresPermissions("修改HTTP接口")
     public void patchInterface(@PathVariable("id") Long id, InterfaceDTO interfaceDTO) {
         Interface anInterface = interfaceDTO.toInterface();
         anInterface.setId(id);
         interfaceService.update(anInterface);
-    }
-
-    @PostMapping("/test")
-    public User getUser(@RequestBody User user) {
-        return user;
     }
 }

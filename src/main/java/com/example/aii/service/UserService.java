@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.aii.entity.User;
 import com.example.aii.exception.AiiException;
 import com.example.aii.mapper.UserMapper;
-import com.example.aii.util.EncryptUtil;
+import com.example.aii.util.EncryptUtils;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +29,8 @@ public class UserService {
         if (checkDuplicateName(user.getUsername())) {
             throw new AiiException("用户名已存在");
         } else {
-            String saleValue = EncryptUtil.createSalt();
-            userMapper.insert(new User(user.getUsername(), EncryptUtil.salt(user.getPassword(), ByteSource.Util.bytes(saleValue)), saleValue, user.getNickname(), user.getSex(), user.getStatus(), null));
+            String saleValue = EncryptUtils.createSalt();
+            userMapper.insert(new User(user.getUsername(), EncryptUtils.salt(user.getPassword(), ByteSource.Util.bytes(saleValue)), saleValue, user.getNickname(), user.getSex(), user.getStatus(), null));
         }
     }
 

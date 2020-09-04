@@ -6,7 +6,7 @@ import org.springframework.util.MultiValueMap;
 import java.util.List;
 import java.util.Map;
 
-public class CommonUtil {
+public class CommonUtils {
 
     public static <K, V> MultiValueMap<K, V> Map2MultiValueMap(Map<K, V> mp) {
         MultiValueMap<K, V> multiBody = new LinkedMultiValueMap<>();
