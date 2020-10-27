@@ -44,8 +44,8 @@
 </template>
 
 <script>
-    import bus from "../common/bus";
-    import domain from '../../../public/domain'
+    import bus from ".//bus";
+    import domain from '@/../public/domain'
 
     export default {
         data() {

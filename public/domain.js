@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     baseUrl: "http://localhost",
     permission: false,
     menu: [
@@ -18,7 +18,12 @@ module.exports = {
                     name: "角色管理",
                     type: "leaf"
 
-                }
+                },
+                {
+                    index: "projectmanagement",
+                    name: "项目管理",
+                    type: "leaf"
+                },
             ]
         },
         {

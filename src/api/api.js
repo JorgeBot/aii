@@ -1,5 +1,5 @@
 import axios from 'axios'
-import domain from '../../public/domain'
+import domain from '@/../public/domain'
 import {MessageBox} from 'element-ui'
 
 axios.defaults.baseURL = domain.baseUrl // 配置axios请求的地址
@@ -24,18 +24,17 @@ axios.interceptors.response.use(
                 case 401: {
                     MessageBox('您还未登录，即将跳转到登录界面', '提示', {
                         confirmButtonText: '确定',
-
                     }).then(() => {
                             location.replace('/#/login');
                         }
                     )
                     break;
                 }
-                case 403:
-                    break;
                 default:
             }
             return Promise.reject(error);
         }
     }
 );
+
+export default axios;

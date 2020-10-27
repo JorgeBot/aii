@@ -25,7 +25,7 @@ a {
     position: absolute;
     left: 250px;
     right: 0;
-    top: 70px;
+    top: 75px;
     bottom: 0;
     padding-bottom: 30px;
     -webkit-transition: left .3s ease-in-out;
@@ -36,9 +36,18 @@ a {
 .content {
     width: auto;
     height: 100%;
-    padding: 10px;
+    padding: 5px 10px 0 10px;
     overflow-y: scroll;
     box-sizing: border-box;
+}
+
+.handle-box {
+    margin-bottom: 20px;
+    min-width: 700px;
+}
+
+.content::-webkit-scrollbar {
+    display: none; /* Chrome Safari */
 }
 
 .content-collapse {
@@ -46,7 +55,8 @@ a {
 }
 
 .container {
-    padding: 30px;
+    height: 625px;
+    /*padding: 20px 30px 30px 30px;*/
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -66,7 +76,7 @@ a {
     margin-bottom: 20px;
 }
 
-.el-button+.el-tooltip {
+.el-button + .el-tooltip {
     margin-left: 10px;
 }
 
@@ -165,7 +175,8 @@ a {
 .editor-btn {
     margin-top: 20px;
 }
-.el-button.el-is-disabled{
+
+.el-button.el-is-disabled {
     color: #bfcbd9;
     cursor: not-allowed;
     background-image: none;
@@ -177,4 +188,14 @@ a {
 
 .v-note-wrapper .v-note-panel {
     min-height: 500px;
+}
+
+.el-table__body-wrapper::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.el-table__body-wrapper::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    border-radius: 3px;
 }

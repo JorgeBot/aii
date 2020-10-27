@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper">
-    <v-head></v-head>
-    <v-sidebar></v-sidebar>
+    <VHead></VHead>
+    <VSidebar></VSidebar>
     <div class="content-box" :class="{'content-collapse':collapse}">
-      <v-tags></v-tags>
+      <VTags></VTags>
       <div class="content">
         <transition name="move" mode="out-in">
           <keep-alive :include="tagsList">
@@ -12,71 +12,30 @@
         </transition>
       </div>
     </div>
-    <el-dialog title="密码修改" :visible.sync="isShow" v-dialogDrag :before-close="handleClose">
-      <el-form :model="form">
-        <el-form-item label="原密码" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="新密码" :label-width="formLabelWidth">
-            <el-input v-model="form.name" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="确认密码" :label-width="formLabelWidth">
-            <el-input show-password v-model="form.name" autocomplete="off"></el-input>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="hideDailog">取 消</el-button>
-        <el-button type="primary" @click="hideDailog">确 定</el-button>
-      </div>
-    </el-dialog>
   </div>
 </template>
 
 <script>
-import vHead from "./Header.vue";
-import vSidebar from "./Sidebar.vue";
-import vTags from "./Tags.vue";
+import VHead from "./Header.vue";
+import VSidebar from "./Sidebar.vue";
+import VTags from "./Tags.vue";
 import bus from "./bus";
-import { mapGetters } from "vuex";
-import { mapActions } from "vuex";
+
 export default {
   data() {
     return {
       tagsList: [],
       collapse: false,
-      form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        formLabelWidth: '120px'
     };
   },
   computed: {
-    ...mapGetters("dailog", {
-      isShow: "isShow"
-    })
   },
   methods: {
-    ...mapActions("dailog", ["hideDailog", "showDailog"]),
-    handleClose(){
-       this.$confirm('确认关闭？')
-          .then(_ => {
-            this.hideDailog();
-            //this.$store.dispatch('dailog/hideDailog')
-          }).bind(this)
-          .catch(_ => {});
-    }
   },
   components: {
-    vHead,
-    vSidebar,
-    vTags
+    VHead,
+    VSidebar,
+    VTags
   },
   created() {
     bus.$on("collapse", msg => {
