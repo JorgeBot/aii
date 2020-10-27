@@ -1,4 +1,4 @@
-package com.example.aii.controller.projectmanagement;
+package com.example.aii.controller.projectmanagement.dto;
 
 import com.example.aii.entity.Project;
 import com.google.common.base.Converter;
@@ -35,7 +35,7 @@ public class ProjectDTO {
         this.description = description;
     }
 
-    public Project toProject(ProjectDTO projectDTO) {
+    public Project toProject() {
         return new Convert().doForward(this);
     }
 

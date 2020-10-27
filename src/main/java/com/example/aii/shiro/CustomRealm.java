@@ -15,16 +15,16 @@ public class CustomRealm extends AuthorizingRealm {
 
     @Lazy
     @Resource
-    private ShrioService shrioService;
+    private AuthorizationService authorizationService;
 
     @Override
     public AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return shrioService.getAuthorizationInfo((User) principalCollection.getPrimaryPrincipal());
+        return authorizationService.getAuthorizationInfo((User) principalCollection.getPrimaryPrincipal());
     }
 
     @Override
     public AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        return shrioService.getAuthenticationInfo(authenticationToken.getPrincipal().toString(), getName());
+        return authorizationService.getAuthenticationInfo(authenticationToken.getPrincipal().toString(), getName());
     }
 
     @Override

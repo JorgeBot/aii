@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.aii.mapper.ProjectMapper">
+    <resultMap id="projectRelatedUserMap" type="com.example.aii.model.ProjectRelatedUser">
+        <result column="related_user_id_array" jdbcType="VARCHAR" property="relatedUserIdArray"
+                typeHandler="com.example.aii.handler.MybatisJSONTypeHandler"/>
+    </resultMap>
+
+    <select id="findByProjectNameLike" resultMap="projectRelatedUserMap">
+        select p.*, json_arrayagg(user_id) related_user_id_array
+        from project p
+        left join relational_user_project rup on p.id = rup.project_id
+        <if test="projectNameLike!=null and projectNameLike!=''">
+            where p.project_name like concat('%', #{projectNameLike}, '%')
+        </if>
+        group by p.id
+    </select>
+</mapper>

@@ -1,4 +1,4 @@
-package com.example.aii.controller.usermanagement;
+package com.example.aii.controller.usermanagement.dto;
 
 import com.example.aii.entity.User;
 import com.google.common.base.Converter;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class RelationUserRolesDTO {
+public class RelatedUserRolesDTO {
     private Long[] userIds;
     private Long[] roleIds;
 
@@ -28,25 +28,25 @@ public class RelationUserRolesDTO {
         this.roleIds = roleIds;
     }
 
-    public User[] toUsers() {
+    public List<User> toUserLs() {
         return new RelationUserRoleConvert().doForward(this);
     }
 
-    private static class RelationUserRoleConvert extends Converter<RelationUserRolesDTO, User[]> {
+    private static class RelationUserRoleConvert extends Converter<RelatedUserRolesDTO, List<User>> {
         @Override
-        protected User[] doForward(@Nonnull RelationUserRolesDTO relationUserRolesDTO) {
+        protected List<User> doForward(@Nonnull RelatedUserRolesDTO relatedUserRolesDTO) {
             List<User> userLs = new ArrayList<>();
-            Arrays.stream(relationUserRolesDTO.getUserIds()).forEach(user -> {
+            Arrays.stream(relatedUserRolesDTO.getUserIds()).forEach(user -> {
                 User u = new User();
                 u.setId(user);
-                u.setRoleIds(relationUserRolesDTO.getRoleIds());
+                u.setRoleIds(relatedUserRolesDTO.getRoleIds());
                 userLs.add(u);
             });
-            return userLs.toArray(new User[0]);
+            return userLs;
         }
 
         @Override
-        protected RelationUserRolesDTO doBackward(@Nonnull User[] users) {
+        protected RelatedUserRolesDTO doBackward(@Nonnull List<User> userLs) {
             return null;
         }
     }

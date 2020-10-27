@@ -14,14 +14,15 @@ spring:
     caffeine:
       spec: initialCapacity=5,maximumSize=500,expireAfterWrite=3600s
 
+
 mybatis-plus:
   mapper-locations: classpath:/mapper/*.xml
-
+  type-handlers-package: com.example.aii.util.CustomTypeHandler
 
 aii:
   # 请求域配置
   allow-origin: http://localhost:8080
-
+  http-client-timeout: 5000
 
 shiro:
   annotations:

@@ -1,8 +1,8 @@
 package com.example.aii.controller.interfacemanagement;
 
-import com.example.aii.entity.Interface;
+import com.example.aii.entity.BaseInterface;
 import com.example.aii.exception.AiiException;
-import com.example.aii.unpack.HTTPUnpack;
+import com.example.aii.util.unpack.HTTPUnpack;
 import com.example.aii.util.LineFeedUtils;
 import com.google.common.base.Converter;
 import org.springframework.beans.BeanUtils;
@@ -58,56 +58,56 @@ public class InterfaceDTO {
         this.responseParams = responseParams;
     }
 
-    public Interface toInterface() {
+    public BaseInterface toInterface() {
         return new Convert().doForward(this);
     }
 
-    private static class Convert extends Converter<InterfaceDTO, Interface> {
+    private static class Convert extends Converter<InterfaceDTO, BaseInterface> {
 
         @Override
-        protected Interface doForward(@Nonnull InterfaceDTO interfaceDTO) {
-            Interface res = new Interface();
-            BeanUtils.copyProperties(interfaceDTO, res);
-            String requestParams = interfaceDTO.getRequestParams();
-            String responseParams = interfaceDTO.getResponseParams();
-            // 拆解requestParams
-            requestParams = LineFeedUtils.toCRLF(requestParams);
-            String[] reqPackets = requestParams.split("\r\n\r\n");
-            String reqHeader = reqPackets[0];
-            String reqBody = reqPackets.length > 2 ? reqPackets[1] : null;
-            // request general
-            HTTPUnpack.General general = HTTPUnpack.handleGeneral(reqHeader.split("\r\n")[0]);
-            BeanUtils.copyProperties(general, res);
-            // request headers
-            LinkedMultiValueMap<String, String> reqHeaderMultiMp = HTTPUnpack.handleHeaders(reqHeader);
-            res.setRequestHeaders(reqHeaderMultiMp);
-            // request parameters
-            if (!StringUtils.isEmpty(reqBody)) {
-                // skip GET HEAD OPTIONS
-                HttpMethod method = general.getMethod();
-                if (!(method.equals(HttpMethod.GET)
-                        || method.equals(HttpMethod.HEAD)
-                        || method.equals(HttpMethod.OPTIONS))) {
-                    res.setRequestData(parametersFormat(reqHeaderMultiMp, reqBody));
-                }
-            }
-            // 拆解responseParams
-            if (!StringUtils.isEmpty(responseParams)) {
-                responseParams = LineFeedUtils.toCRLF(responseParams);
-                String[] resPackets = responseParams.split("\r\n\r\n");
-                String resHeader = resPackets[0];
-                String resBody = resPackets.length > 2 ? resPackets[1] : null;
-                LinkedMultiValueMap<String, String> resHeaderMultiMp = HTTPUnpack.handleHeaders(resHeader);
-                res.setResponseHeaders(reqHeaderMultiMp);
-                if (!StringUtils.isEmpty(resBody)) {
-                    res.setResponseBody(parametersFormat(resHeaderMultiMp, resBody));
-                }
-            }
-            return res;
+        protected BaseInterface doForward(@Nonnull InterfaceDTO interfaceDTO) {
+//            BaseInterface res = new BaseInterface();
+//            BeanUtils.copyProperties(interfaceDTO, res);
+//            String requestParams = interfaceDTO.getRequestParams();
+//            String responseParams = interfaceDTO.getResponseParams();
+//            // 拆解requestParams
+//            requestParams = LineFeedUtils.toCRLF(requestParams);
+//            String[] reqPackets = requestParams.split("\r\n\r\n");
+//            String reqHeader = reqPackets[0];
+//            String reqBody = reqPackets.length > 2 ? reqPackets[1] : null;
+//            // request general
+//            HTTPUnpack.General general = HTTPUnpack.handleGeneral(reqHeader.split("\r\n")[0]);
+//            BeanUtils.copyProperties(general, res);
+//            // request headers
+//            LinkedMultiValueMap<String, String> reqHeaderMultiMp = HTTPUnpack.handleHeaders(reqHeader);
+//            res.setRequestHeaders(reqHeaderMultiMp);
+//            // request parameters
+//            if (!StringUtils.isEmpty(reqBody)) {
+//                // skip GET HEAD OPTIONS
+//                HttpMethod method = general.getMethod();
+//                if (!(method.equals(HttpMethod.GET)
+//                        || method.equals(HttpMethod.HEAD)
+//                        || method.equals(HttpMethod.OPTIONS))) {
+//                    res.setRequestData(parametersFormat(reqHeaderMultiMp, reqBody));
+//                }
+//            }
+//            // 拆解responseParams
+//            if (!StringUtils.isEmpty(responseParams)) {
+//                responseParams = LineFeedUtils.toCRLF(responseParams);
+//                String[] resPackets = responseParams.split("\r\n\r\n");
+//                String resHeader = resPackets[0];
+//                String resBody = resPackets.length > 2 ? resPackets[1] : null;
+//                LinkedMultiValueMap<String, String> resHeaderMultiMp = HTTPUnpack.handleHeaders(resHeader);
+//                res.setResponseHeaders(reqHeaderMultiMp);
+//                if (!StringUtils.isEmpty(resBody)) {
+//                    res.setResponseBody(parametersFormat(resHeaderMultiMp, resBody));
+//                }
+//            }
+            return null;
         }
 
         @Override
-        protected InterfaceDTO doBackward(@Nonnull Interface anInterface) {
+        protected InterfaceDTO doBackward(@Nonnull BaseInterface anBaseInterface) {
             return null;
         }
 

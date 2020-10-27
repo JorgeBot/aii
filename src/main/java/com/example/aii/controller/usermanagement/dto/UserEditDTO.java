@@ -1,16 +1,18 @@
-package com.example.aii.controller.usermanagement;
+package com.example.aii.controller.usermanagement.dto;
 
 import com.example.aii.entity.User;
 import com.google.common.base.Converter;
 import org.springframework.beans.BeanUtils;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 public class UserEditDTO {
 
     private String nickname;
     private User.STATUS status;
     private Long[] roleIds;
+    private List<Number> relatedProjectIdArray;
 
     public String getNickname() {
         return nickname;
@@ -34,6 +36,14 @@ public class UserEditDTO {
 
     public void setRoleIds(Long[] roleIds) {
         this.roleIds = roleIds;
+    }
+
+    public List<Number> getRelatedProjectIdArray() {
+        return relatedProjectIdArray;
+    }
+
+    public void setRelatedProjectIdArray(List<Number> relatedProjectIdArray) {
+        this.relatedProjectIdArray = relatedProjectIdArray;
     }
 
     public User getUser() {

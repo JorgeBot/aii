@@ -1,7 +1,7 @@
 package com.example.aii;
 
-import com.example.aii.mapper.InterfaceMapper;
-import com.example.aii.service.InterfaceService;
+import com.example.aii.mapper.HttpInterfaceMapper;
+import com.example.aii.service.impl.HttpInterfaceService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
@@ -18,13 +18,13 @@ import java.io.IOException;
 class AiiApplicationTests {
 
     @Resource
-    InterfaceMapper mapper;
+    HttpInterfaceMapper mapper;
 
     @Autowired
     RestTemplate restTemplate;
 
     @Resource
-    InterfaceService interfaceService;
+    HttpInterfaceService httpInterfaceService;
 
     @Test
     void contextLoads() throws IOException {
@@ -33,8 +33,4 @@ class AiiApplicationTests {
         SimpleHash simpleHash = new SimpleHash("SHA-256", cr, bytes, 2);
     }
 
-    @Test
-    void m1() throws JsonProcessingException {
-        ResponseEntity<String> run = interfaceService.run(17L);
-    }
 }

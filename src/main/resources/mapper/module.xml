@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.aii.mapper.ModuleMapper">
+    <select id="selectByUserId" resultType="com.example.aii.entity.Module">
+        select *
+        from module m
+            join project p on m.project_id = p.id
+            join relational_user_project rup on p.id = rup.project_id
+            join user u on rup.user_id = u.id
+        where u.id = #{userId}
+    </select>
+</mapper>

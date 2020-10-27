@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Set;
 
-public class UserInformationVO {
+public class UserInformationDTO {
 
     private String username;
     private String nickname;
@@ -57,19 +57,19 @@ public class UserInformationVO {
         this.resources = resources;
     }
 
-    public UserInformationVO fromMap(Map<String, Object> mp) {
+    public UserInformationDTO fromMap(Map<String, Object> mp) {
         return new Convert().doBackward(mp);
     }
 
-    private static class Convert extends Converter<UserInformationVO, Map<String, Object>> {
+    private static class Convert extends Converter<UserInformationDTO, Map<String, Object>> {
         @Override
-        protected Map<String, Object> doForward(@Nonnull UserInformationVO userInformationVO) {
+        protected Map<String, Object> doForward(@Nonnull UserInformationDTO userInformationDTO) {
             return null;
         }
 
         @Override
-        protected UserInformationVO doBackward(@Nonnull Map<String, Object> stringObjectMap) {
-            UserInformationVO vo = new UserInformationVO();
+        protected UserInformationDTO doBackward(@Nonnull Map<String, Object> stringObjectMap) {
+            UserInformationDTO vo = new UserInformationDTO();
             try {
                 BeanUtils.populate(vo, stringObjectMap);
             } catch (IllegalAccessException | InvocationTargetException e) {

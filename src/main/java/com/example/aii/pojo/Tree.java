@@ -43,7 +43,9 @@ public class Tree<E> implements Serializable {
      * @return
      */
     public static <T> List<Tree<T>> nesting(List<Tree<T>> trees) {
-        List<Tree<T>> trunks = trees.stream().filter(f -> f.getType().equals(TYPE.TRUNK)  || f.getParentId() == null).collect(Collectors.toList());
+        List<Tree<T>> trunks = trees.stream()
+                .filter(f -> TYPE.TRUNK.equals(f.getType())  || f.getParentId() == null || f.getParentId() == 0L)
+                .collect(Collectors.toList());
         trunks.forEach(e -> pointer(trees, e));
         return trunks;
     }

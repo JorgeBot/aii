@@ -1,8 +1,8 @@
 package com.example.aii.shiro;
 
 import com.example.aii.entity.User;
-import com.example.aii.service.RoleService;
-import com.example.aii.service.UserService;
+import com.example.aii.service.impl.RoleService;
+import com.example.aii.service.impl.UserService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Service
-public class ShrioService {
+public class AuthorizationService {
 
     @Resource
     private UserService userService;

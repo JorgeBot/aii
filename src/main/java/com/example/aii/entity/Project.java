@@ -1,8 +1,15 @@
 package com.example.aii.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
+
+import java.util.List;
+
+@TableName(autoResultMap = true)
 public class Project extends BaseEntity {
 
-    public enum STATUS {正常, 停用}
+    public enum STATUS {正常, 禁用}
 
     private String projectName;
     private STATUS status;
@@ -31,4 +38,5 @@ public class Project extends BaseEntity {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }

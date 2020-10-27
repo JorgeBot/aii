@@ -2,12 +2,18 @@ package com.example.aii.controller.usermanagement;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.aii.controller.usermanagement.dto.RelatedUserRolesDTO;
+import com.example.aii.controller.usermanagement.dto.UserDTO;
+import com.example.aii.controller.usermanagement.dto.UserEditDTO;
+import com.example.aii.entity.Project;
 import com.example.aii.entity.User;
-import com.example.aii.service.UserService;
+import com.example.aii.model.UserRelatedProject;
+import com.example.aii.service.impl.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequiresPermissions("人员管理")
@@ -18,9 +24,14 @@ public class UserManagementController {
 
 
     @GetMapping("/userPage")
-    public IPage<User> getUserPageByNameLike(@RequestParam(required = false) String queryNameLike,
-                                             Page<User> page) {
+    public IPage<UserRelatedProject> getUserPageByNameLike(@RequestParam(required = false) String queryNameLike,
+                                                           Page<User> page) {
         return userService.findPageByNameLike(queryNameLike, page);
+    }
+
+    @GetMapping("/users")
+    public List<User> getUsers() {
+        return userService.list();
     }
 
     @PostMapping("/user")
@@ -30,17 +41,22 @@ public class UserManagementController {
     }
 
     @PatchMapping("/user/{id}")
-    @RequiresPermissions("编辑用户")
+    @RequiresPermissions("用户操作")
     public void updateUser(@PathVariable("id") Long id, UserEditDTO userEditDTO) {
         User user = userEditDTO.getUser();
         user.setId(id);
-        userService.updateUser(user);
+        userService.updateAndRelatedProjectById(user, userEditDTO.getRelatedProjectIdArray());
     }
 
-    @PostMapping("/relationUserRole")
-    @RequiresPermissions("配置角色")
-    public void postRelationUserRole(RelationUserRolesDTO relationUserRolesDTO) {
-        User[] users = relationUserRolesDTO.toUsers();
-        userService.updateBatch(users);
+    @PostMapping("/relatedUserRole")
+    @RequiresPermissions("用户操作")
+    public void postRelationUserRole(RelatedUserRolesDTO relatedUserRolesDTO) {
+        List<User> userLs = relatedUserRolesDTO.toUserLs();
+        userService.updateBatchById(userLs);
+    }
+
+    @GetMapping("/user/{userId}/relationProject")
+    public List<Project> getRelationProject(@PathVariable Long userId) {
+        return userService.findRelationProject(userId);
     }
 }

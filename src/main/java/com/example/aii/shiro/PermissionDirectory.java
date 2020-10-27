@@ -5,6 +5,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Nonnull;
 import java.lang.reflect.Method;
 import java.util.*;
 
@@ -14,7 +15,7 @@ public class PermissionDirectory implements BeanPostProcessor {
     private static final Map<String, Set<String>> permission = new HashMap<>();
 
     @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+    public Object postProcessBeforeInitialization(Object bean, @Nonnull String beanName) throws BeansException {
         Class<?> clazz = bean.getClass();
         RequiresPermissions typeAnn = clazz.getDeclaredAnnotation(RequiresPermissions.class);
         if (typeAnn != null) {

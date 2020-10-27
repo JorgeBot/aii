@@ -1,7 +1,8 @@
 package com.example.aii.controller.rolemanagment;
 
+import com.example.aii.controller.rolemanagment.dto.RoleDTO;
 import com.example.aii.entity.Role;
-import com.example.aii.service.RoleService;
+import com.example.aii.service.impl.RoleService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class RoleManagementController {
 
     @GetMapping("/roles")
     public List<Role> getAllRoles() {
-        return roleService.getAllRoles();
+        return roleService.list();
     }
 
     @PostMapping("/role")
@@ -29,20 +30,20 @@ public class RoleManagementController {
 
 
     @PatchMapping("/role/{id}")
-    @RequiresPermissions("编辑角色")
+    @RequiresPermissions("角色操作")
     public void updateRole(@PathVariable("id") Long id, RoleDTO roleDTO) {
         roleDTO.setId(id);
         roleService.updateById(roleDTO.toRole());
     }
 
     @DeleteMapping("role/{id}")
+    @RequiresPermissions("角色操作")
     public void deleteById(@PathVariable("id") Long id) {
         roleService.deleteById(id);
     }
 
-
-    @RequiresPermissions("保存权限")
     @PatchMapping("/role/{roleId}/resources")
+    @RequiresPermissions("资源配置")
     public void updateRoleOfResources(@PathVariable("roleId") Long roleId, @RequestBody Set<String> resources) {
         Role role = new Role();
         role.setResources(resources);

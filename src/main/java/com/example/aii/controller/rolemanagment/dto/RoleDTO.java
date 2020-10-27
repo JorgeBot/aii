@@ -1,4 +1,4 @@
-package com.example.aii.controller.rolemanagment;
+package com.example.aii.controller.rolemanagment.dto;
 
 import com.example.aii.entity.Role;
 import com.example.aii.shiro.PermissionDirectory;

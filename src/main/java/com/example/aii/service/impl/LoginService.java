@@ -1,10 +1,15 @@
-package com.example.aii.service;
+package com.example.aii.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.aii.entity.Role;
 import com.example.aii.entity.User;
+import com.example.aii.exception.ValidationFailedException;
+import com.example.aii.mapper.UserMapper;
 import com.example.aii.shiro.LoginUtils;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
@@ -15,7 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
-public class LoginService {
+public class LoginService extends ServiceImpl<UserMapper, User> implements IService<User> {
 
     @Resource
     private UserService userService;
@@ -27,11 +32,17 @@ public class LoginService {
         Map<String, Object> resMp = new HashMap<>();
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword(), rememberMe);
-        subject.login(token);
+        try {
+            subject.login(token);
+        } catch (IncorrectCredentialsException e) {
+            throw new ValidationFailedException("密码错误");
+        } catch (AuthenticationException e) {
+            throw new ValidationFailedException(e.getMessage());
+        }
         User loginUser = LoginUtils.getLoginUser();
         // 更新最后更新时间
         loginUser.setLastLoginDatetime(LocalDateTime.now());
-        userService.updateUser(loginUser);
+        userService.updateById(loginUser);
         // 获取用户角色信息
         List<Role> roleSet = roleService.findByUserId(loginUser.getId());
         Set<String> menuSet = new HashSet<>();

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.aii.mapper.HttpInterfaceMapper">
+    <select id="selectByNameLikeAndModuleId" resultType="com.example.aii.entity.HttpInterface">
+        select *
+        from http_interface
+        where module_id in (
+            with recursive r as (
+                select id
+                from module
+                where id = #{moduleId}
+                union all
+                select m.id
+                from r
+                         join module m on r.id = m.parent_id
+            )
+            select id
+            from r
+        )
+        <if test="queryLike!=null and queryLike!=''">
+            and interface_name like concat('%', #{queryLike}, '%')
+        </if>
+    </select>
+</mapper>

@@ -1,5 +1,6 @@
-package com.example.aii.shiro;
+package com.example.aii.config;
 
+import com.example.aii.shiro.CustomRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.event.EventBus;
 import org.apache.shiro.event.support.DefaultEventBus;
@@ -27,7 +28,6 @@ public class ShiroConfig {
     }
 
     @Bean
-//    @ConditionalOnProperty(name = "shiro.web.enabled", matchIfMissing = true)
     public Realm injectAuthorizingRealm(HashedCredentialsMatcher matcher) {
         CustomRealm realm = new CustomRealm();
         realm.setCredentialsMatcher(matcher);

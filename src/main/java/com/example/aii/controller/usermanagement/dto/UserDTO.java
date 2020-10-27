@@ -1,4 +1,4 @@
-package com.example.aii.controller.usermanagement;
+package com.example.aii.controller.usermanagement.dto;
 
 import com.example.aii.entity.User;
 import com.google.common.base.Converter;
@@ -6,19 +6,10 @@ import org.springframework.beans.BeanUtils;
 
 public class UserDTO {
 
-    private String username;
     private String password;
     private String nickname;
     private User.SEX sex;
     private User.STATUS status;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getPassword() {
         return password;

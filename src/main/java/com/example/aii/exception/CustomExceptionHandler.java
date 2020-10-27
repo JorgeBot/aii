@@ -1,5 +1,6 @@
 package com.example.aii.exception;
 
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.http.HttpStatus;
@@ -13,22 +14,26 @@ import org.apache.shiro.authc.AuthenticationException;
 public class CustomExceptionHandler {
 
     @ExceptionHandler(AuthenticationException.class)
-    @ResponseStatus(HttpStatus.BAD_GATEWAY)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     public String handlerAuthenticationException(AuthenticationException e) {
+        return e.getMessage();
+    }
+
+    @ExceptionHandler(ValidationFailedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public String handlerValidationFailedException(ValidationFailedException e) {
         return e.getMessage();
     }
 
     @ExceptionHandler(UnauthorizedException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public String handlerUnauthorizedException(UnauthorizedException e) {
-        System.out.println("没有权限");
         return "没有权限";
     }
 
     @ExceptionHandler(AuthorizationException.class)
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     public String handlerAuthorizationException(AuthorizationException e) {
-        System.out.println("未授权访问");
         return "未授权访问";
     }
 
