@@ -26,13 +26,13 @@ public class CustomExceptionHandler {
     }
 
     @ExceptionHandler(UnauthorizedException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public String handlerUnauthorizedException(UnauthorizedException e) {
         return "没有权限";
     }
 
     @ExceptionHandler(AuthorizationException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public String handlerAuthorizationException(AuthorizationException e) {
         return "未授权访问";
     }

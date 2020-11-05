@@ -8,5 +8,6 @@
             join relational_user_project rup on p.id = rup.project_id
             join user u on rup.user_id = u.id
         where u.id = #{userId}
+        order by m.id desc
     </select>
 </mapper>

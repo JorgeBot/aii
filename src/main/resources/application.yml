@@ -14,6 +14,11 @@ spring:
     caffeine:
       spec: initialCapacity=5,maximumSize=500,expireAfterWrite=3600s
 
+logging:
+  level:
+    com.example.aii: info
+  file:
+    name: ./logs/aii.log
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/*.xml

@@ -23,5 +23,6 @@
             where u.user_name like concat('%', #{queryNameLike}, '%')
         </if>
         group by u.id
+        order by u.id desc
     </select>
 </mapper>

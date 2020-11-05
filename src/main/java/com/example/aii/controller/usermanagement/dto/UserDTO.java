@@ -6,10 +6,19 @@ import org.springframework.beans.BeanUtils;
 
 public class UserDTO {
 
+    private String username;
     private String password;
     private String nickname;
     private User.SEX sex;
     private User.STATUS status;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getPassword() {
         return password;

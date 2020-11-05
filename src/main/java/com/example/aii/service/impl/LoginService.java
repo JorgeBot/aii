@@ -12,6 +12,8 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,6 +23,8 @@ import java.util.*;
 
 @Service
 public class LoginService extends ServiceImpl<UserMapper, User> implements IService<User> {
+
+    Logger logger = LoggerFactory.getLogger(LoginService.class);
 
     @Resource
     private UserService userService;
@@ -51,6 +55,9 @@ public class LoginService extends ServiceImpl<UserMapper, User> implements IServ
             if (e.getMenus() != null) menuSet.addAll(e.getMenus());
             if (e.getResources() != null) resourceSet.addAll(e.getResources());
         });
+
+        logger.info("[{}]login trace_id:{}", loginUser.getUsername(), loginUser.traceId());
+
         resMp.put("id", loginUser.getId());
         resMp.put("username", loginUser.getUsername());
         resMp.put("nickname", loginUser.getNickname());

@@ -39,6 +39,10 @@ public class User extends BaseEntity {
         this.lastLoginDatetime = lastLoginDatetime;
     }
 
+    public String traceId() {
+        return String.valueOf(this.lastLoginDatetime.hashCode()) + this.getId();
+    }
+
     public String getUsername() {
         return username;
     }

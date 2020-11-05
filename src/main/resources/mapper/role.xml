@@ -6,9 +6,6 @@
         from user u
                  join role r on JSON_CONTAINS(u.role_ids, JSON_ARRAY(r.id))
         where u.id = #{userId}
-    </select>
-
-    <select id="selectById1" resultType="com.example.aii.entity.Role">
-        select * from role where id = #{id}
+        order by r.id desc
     </select>
 </mapper>

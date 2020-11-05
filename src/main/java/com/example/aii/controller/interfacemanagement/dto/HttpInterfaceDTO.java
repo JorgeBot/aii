@@ -1,4 +1,4 @@
-package com.example.aii.controller.interfacemanagement;
+package com.example.aii.controller.interfacemanagement.dto;
 
 import com.example.aii.entity.HttpInterface;
 import com.google.common.base.Converter;
@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 
 public class HttpInterfaceDTO {
     private Long Id;
+    private Long moduleId;
     private String interfaceName;
     private String host;
     private Integer port;
@@ -20,6 +21,14 @@ public class HttpInterfaceDTO {
 
     public void setId(Long id) {
         Id = id;
+    }
+
+    public Long getModuleId() {
+        return moduleId;
+    }
+
+    public void setModuleId(Long moduleId) {
+        this.moduleId = moduleId;
     }
 
     public String getInterfaceName() {

@@ -1,16 +1,12 @@
-package com.example.aii.controller.interfacemanagement;
+package com.example.aii.controller.interfacemanagement.dto;
 
 import com.example.aii.entity.BaseInterface;
 import com.example.aii.exception.AiiException;
 import com.example.aii.util.unpack.HTTPUnpack;
-import com.example.aii.util.LineFeedUtils;
 import com.google.common.base.Converter;
-import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.StringUtils;
 
 import javax.annotation.Nonnull;
 import java.io.UnsupportedEncodingException;

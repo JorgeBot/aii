@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiresPermissions("项目管理")
@@ -69,11 +70,11 @@ public class ProjectManagementController {
     }
 
     @GetMapping("/project/{projectId}/modulesTree")
-    public List<Tree<Module>> getModulesTreeByProjectId(@PathVariable Long projectId) {
+    public List<Tree<Object>> getModulesTreeByProjectId(@PathVariable Long projectId) {
         List<Module> moduleList = moduleService.findByProjectId(projectId);
-        List<Tree<Module>> ModuleTree = new ArrayList<>();
-        moduleList.forEach(e -> ModuleTree.add(new Tree<>(e.getId(), e.getParentId(), e.getModuleName())));
-        return Tree.nesting(ModuleTree);
+        List<Tree<Object>> moduleTree = moduleList.stream().map(e -> new Tree<>(e.getId(), e.getParentId(), e.getModuleName()))
+                .collect(Collectors.toList());
+        return Tree.nesting(moduleTree);
     }
 
     @PostMapping("/project/module")

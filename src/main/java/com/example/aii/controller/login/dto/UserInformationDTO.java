@@ -1,4 +1,4 @@
-package com.example.aii.controller.login;
+package com.example.aii.controller.login.dto;
 
 import com.google.common.base.Converter;
 import org.apache.commons.beanutils.BeanUtils;

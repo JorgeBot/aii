@@ -1,4 +1,4 @@
-package com.example.aii.controller.login;
+package com.example.aii.controller.login.dto;
 
 public class PasswordFormDTO {
     private String username;

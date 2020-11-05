@@ -2,6 +2,7 @@ package com.example.aii.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.time.LocalDateTime;
 
@@ -52,5 +53,10 @@ public abstract class BaseEntity {
 
     public void setCreator(String creator) {
         this.creator = creator;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }

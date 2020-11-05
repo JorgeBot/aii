@@ -3,6 +3,7 @@ package com.example.aii.controller.interfacemanagement;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.aii.client.HttpClient;
+import com.example.aii.controller.interfacemanagement.dto.HttpInterfaceDTO;
 import com.example.aii.entity.HttpInterface;
 import com.example.aii.service.impl.HttpInterfaceService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -13,6 +14,7 @@ import javax.annotation.Resource;
 @RestController
 @RequiresPermissions("HTTP接口")
 public class InterfaceManagementController {
+
 
     @Resource
     private HttpClient httpClient;
@@ -41,5 +43,10 @@ public class InterfaceManagementController {
     @PatchMapping("/httpInterface")
     public void patchHttpInterface(HttpInterfaceDTO dto) {
         httpInterfaceService.updateById(dto.toHttpInterface());
+    }
+
+    @DeleteMapping("/httpInterface/{httpInterfaceId}")
+    public void deleteHttpInterface(@PathVariable Long httpInterfaceId) {
+        httpInterfaceService.removeById(httpInterfaceId);
     }
 }

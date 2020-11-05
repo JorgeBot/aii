@@ -1,12 +1,11 @@
 package com.example.aii.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.aii.controller.login.PasswordFormDTO;
+import com.example.aii.controller.login.dto.PasswordFormDTO;
 import com.example.aii.entity.Project;
 import com.example.aii.entity.RelationalUserProject;
 import com.example.aii.entity.User;
@@ -82,15 +81,17 @@ public class UserService extends ServiceImpl<UserMapper, User> implements IServi
             updateById(user);
         }
         // 判断是否关联变更
-        List<RelationalUserProject> rupLs = relationalUserProjectService.getByUserId(userId);
-        List<Long> rpaConvert = relatedProjectIdArray.stream()
-                .map(Number::longValue)
-                .collect(Collectors.toList());
-        List<Long> rpa = rupLs.stream()
-                .map(RelationalUserProject::getProjectId)
-                .collect(Collectors.toList());
-        if (!rpaConvert.equals(rpa)) {
-            relationalUserProjectService.reRelatedUser2Project(userId, rpaConvert);
+        if (relatedProjectIdArray != null) {
+            List<RelationalUserProject> rupLs = relationalUserProjectService.getByUserId(userId);
+            List<Long> rpaConvert = relatedProjectIdArray.stream()
+                    .map(Number::longValue)
+                    .collect(Collectors.toList());
+            List<Long> rpa = rupLs.stream()
+                    .map(RelationalUserProject::getProjectId)
+                    .collect(Collectors.toList());
+            if (!rpaConvert.equals(rpa)) {
+                relationalUserProjectService.reRelatedUser2Project(userId, rpaConvert);
+            }
         }
     }
 
